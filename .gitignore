@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+
+# work-in-progress ideas
+2_Mol_rep_fp.qmd
+
+# unused files
+hello.py

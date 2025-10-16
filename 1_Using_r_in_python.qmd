@@ -1,0 +1,27 @@
+---
+title: "Using R in Python"
+author: Jennifer HY Lin
+date: 2025-10-16
+draft: true
+categories: 
+    - Notes
+format: html
+---
+
+This is something I've always wanted to try, that is using both R and Python in one place so here it is. 
+
+Steps:
+
+1. Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (ref: https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/).
+
+2. Install R's language server as shown below.
+
+```{r}
+install.packages("languageserver")
+```
+
+3. Install R extension for VS Code (because I'm using VS Code but I think there is a very similar IDE called Positron created by Posit which may be easier to use for this case).
+
+4. Install [rpy2 package](https://github.com/rpy2/rpy2).
+
+5. I'll have to try to show and run both R and Python code below **to be done**
