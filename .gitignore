@@ -9,9 +9,12 @@ wheels/
 # Virtual environments
 .venv
 
-
 # work-in-progress ideas
 2_Mol_rep_fp.qmd
 
 # unused files
 hello.py
+
+.DS_Store
+1_Using_r_in_python_files
+1_Using_r_in_python.html
