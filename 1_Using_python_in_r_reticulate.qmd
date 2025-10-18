@@ -1,7 +1,7 @@
 ---
-title: "Using R in Python"
+title: "Using Python in R - reticulate"
 author: Jennifer HY Lin
-date: 2025-10-16
+date: 2025-10-19
 draft: true
 categories: 
     - Notes
@@ -16,33 +16,34 @@ This notebook has been created using a virtual environment using uv, with the as
 
 1. Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (ref: https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/).
 
-
 2. Install R's language server as shown below.
-
-```{r}
-install.packages("languageserver")
-```
 
 3. I've just figured out that I probably should've installed [reticulate package](https://rstudio.github.io/reticulate/) first actually ([GitHub repo here](https://github.com/rstudio/reticulate/)). It's basically a R interface to Python that'll be very useful.
 
-```{r}
-install.packages("reticulate")
-```
-
 * Install rmarkdown package so can preview .qmd docs.
-
-```{r}
-install.packages("rmarkdown")
-```
 
 * Go to Settings of VS Code -> under "User" -> Text Editor -> Files -> Associations -> add *.Rmd as "Item" and rmd as "Value"
 
 4. Install R extension for VS Code (because I'm using VS Code but I think there is a very similar IDE called Positron created by Posit which may be easier to use for this case).
 
-5. Install [rpy2 package](https://github.com/rpy2/rpy2).
-
 * Install shiny package
 
 -> then I got the rmarkdown preview to work!
 
-6. I'll have to try to show and run both R and Python code below **to be done**
+5. I'll have to try to show and run both R and Python code below **to be done**
+
+```{r}
+library(reticulate)
+```
+
+```{r}
+# Run Python code
+py_run_string("x = 10")
+py_run_string("y = 5")
+py_run_string("z = x + y")
+
+# Access the Python variable in R
+z <- py$z  # Correctly access the Python variable 'z' in R
+print(z)
+```
+
