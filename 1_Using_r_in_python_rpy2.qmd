@@ -1,7 +1,7 @@
 ---
-title: "Using R in Python"
+title: "Using R in Python - rpy2"
 author: Jennifer HY Lin
-date: 2025-10-16
+date: 2025-10-18
 draft: true
 categories: 
     - Notes
@@ -43,8 +43,60 @@ Note: the installations of R-related packages need to be done in the R console i
 
 6. I'll have to try to show and run both R and Python code below **to be done**
 
+*There are possibly two packages that may do the trick - one is rpy2 and the other is reticulate. So I'll try rpy2 first.*
+
 ```{python}
-# import rpy2
-# import rpy2.robjects as robjects
+import rpy2
+import rpy2 as robjects
+```
+
+```{python}
+# from functools import partial
+# from rpy2.ipython import html
+# html.html_rdataframe=partial(html.html_rdataframe, table_class="docutils")
+
+## To print HTML in notebooks
+import rpy2.ipython.html
+rpy2.ipython.html.init_printing()
+
+from rpy2.robjects.packages import importr
+```
+
+```{python}
+utils = importr('utils')
+
+# Sample data only
+dataf = utils.read_csv(
+'https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/' 
+'master/notebooks_v1/data/california_cities.csv'
+)
+dataf
+```
+
+So far, all code above work with a final output of a dataframe shown but it won't transform into a .qmd preview i.e. html page, therefore rpy2 may not be as easy to use so far. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. When running the code cells below, the same error message is there too.
+
+```{python}
+import rpy2.robjects.lib.ggplot2 as gp
+
+# Visualising with ggplot2 in Python
+
+# ggplot2 = importr('ggplot2')
+
+# import rpy2.robjects.lib.ggplot2 as ggplot2
+# from robjects.robjects.lib import ggplot2
+
+from rpy2.robjects import rl
+
+p = (gp.ggplot(dataf) +
+     gp.aes(x=rl('longd'),
+            y=rl('latd'),
+            color=rl('population_total'),
+            size=rl('area_total_km2')) +
+     gp.geom_point() +
+     gp.scale_color_continuous(trans='log10'))
+
+## To see plots in an output cell
+from rpy2.ipython.ggplot import image_png
+image_png(p)
 ```
 

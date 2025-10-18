@@ -46,12 +46,3 @@ install.packages("rmarkdown")
 -> then I got the rmarkdown preview to work!
 
 6. I'll have to try to show and run both R and Python code below **to be done**
-
-
-```{python}
-# import rpy2
-# import rpy2.robjects as robjects
-```
-
-* Run rmarkdown::run("1_Using_r_in_python.rmd") in R terminal to preview .rmd 
-(although not a good practice to leave install packages code in rmarkdown as if using alternative "Knit Rmd" button to preview, this'll lead to the same error message)
