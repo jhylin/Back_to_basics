@@ -38,7 +38,14 @@ R.version.string
 ```
 
 ```{r}
+# Import R packages/libraries in R
 library(reticulate)
+
+# Import Python packages/libraries in R 
+# (need this step to install Python packages for use later in R while using reticulate)
+# Ref: https://rstudio.github.io/reticulate/articles/python_packages.html
+py_require("pandas")    
+pd <- import("pandas")
 ```
 
 ```{r}
@@ -47,16 +54,27 @@ py_config()
 ```
 
 ```{r}
-# Run Python code
+# Running Python code in R
 py_run_string("x = 10")
 py_run_string("y = 5")
 py_run_string("z = x + y")
 
 # Access the Python variable in R
-z <- py$z  # Correctly access the Python variable 'z' in R
+z <- py$z  
 print(z)
 ```
 
 I have a feeling now that it's easier to use reticulate package for the purpose of combining Python and R in one place.
 
-Will need to try other code later.
+Below is a small example using Python code to read a dataframe using Pandas.
+
+```{python}
+# import pandas (as usual in Python)
+import pandas as pd
+
+# Reading a df (using one of my old cleaned datasets from a while ago)
+df = pd.read_csv("df_ml.csv")
+df.head()
+```
+
+Maybe try ggplot2 next or set up a function code in Python script and run it in R?
