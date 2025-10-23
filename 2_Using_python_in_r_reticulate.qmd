@@ -1,7 +1,7 @@
 ---
 title: "Using Python in R - reticulate"
 author: Jennifer HY Lin
-date: 2025-10-19
+date: 2025-10-23
 draft: true
 categories: 
     - Notes
@@ -18,7 +18,11 @@ Initial preparation - this notebook has been created using a virtual environment
 
 1. Install R with version at least 4.0 or above, and Python with version at least 3.7 or above ([reference](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of R and Python used here are suggested by the old reference post about using rpy2 from 2022. So far when I've tried it with reticulate package, it works so I'll leave them as how they are now.
 
-2. Install R's language server.
+2. Install R's language server. All R packages are to be installed via R console/terminal.
+
+```{{r}}
+install.packages("languageserver")
+```
 
 3. Install [reticulate package](https://rstudio.github.io/reticulate/) as shown in its [GitHub repo](https://github.com/rstudio/reticulate/).
 
@@ -53,7 +57,8 @@ py_config()
 
 Below is a small test snippet of running Python code in R.
 
-```{r}
+```{{r}}
+# Code snippet below borrowed from https://www.geeksforgeeks.org/r-language/integrating-python-code-with-r/
 # Running Python code in R
 py_run_string("x = 10")
 py_run_string("y = 5")
@@ -68,26 +73,29 @@ I have a feeling now that it's easier to use reticulate package for the purpose 
 
 Next example is using Python code to read a dataframe using Pandas.
 
-```{python}
-# # import pandas (as usual in Python)
-# import pandas as pd
+```{{python}}
+# import pandas (as usual in Python)
+import pandas as pd
 
-# # Reading a df (using one of my old cleaned datasets from a while ago)
-# df = pd.read_csv("df_ml.csv")
-# df = df.rename(columns={"QED Weighted": "QED"})
-# df.head()
+def reading_df(file):
+    # Reading a df (using one of my old cleaned datasets from a while ago)
+    df = pd.read_csv(file)
+    df = df.rename(columns={"QED Weighted": "QED", "Polar Surface Area": "PSA"})
+    
+    return df
 ```
 
 ```{r}
-# Transfer above short code into a function and saved as a .py script
+# Transfer code to read df into a function and saved as a .py script
 source_python("read_df.py")
 df <- reading_df("df_ml.csv")
-```
 
-```{r}
 library(ggplot2)
 
-# Sample plot for trial only 
-# (will need to use a different dataset to show a more meaningful plot actually... plot looks funny at the moment!)
-ggplot(df, aes(Max_Phase, QED)) + geom_point()
+# Sample plot 
+ggplot(df, aes(PSA, QED, colour = Max_Phase)) + 
+    geom_point() + 
+    geom_jitter()
 ```
+
+An equivalent Python plotting library based on ggplot2 is [plotnine](https://plotnine.org/).
