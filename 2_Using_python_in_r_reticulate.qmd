@@ -26,11 +26,9 @@ Initial preparation - this notebook has been created using a virtual environment
 
 5. Install R extension for VS Code (because I'm using VS Code but I think there is a very similar IDE called Positron created by Posit which may be easier to use for this case).
 
-6. Install shiny package (I was reminded to do this while installing these packages... unsure of it's direct relevance to my goal here but it doesn't hurt so I've done it)
+6. Install shiny package (I was reminded to do this while installing these packages... unsure of its direct relevance to my goal here but it doesn't hurt so I've done it)
 
 Quarto markdown documents (.qmd) and R markdown documents (.rmd) are interchangeable as .qmd are based on .rmd so I've done a little trial using reticulate package first in .rmd which worked, and then decided to switch to .qmd so that this piece of work may be published on my blog later. The convenient thing here is that you can literally just change the file name ending with .rmd to .qmd to convert a .rmd file into a .qmd file.
-
-Below is a small test snippet of running Python code in R.
 
 ```{r}
 # Show R version used
@@ -53,6 +51,8 @@ pd <- import("pandas")
 py_config()
 ```
 
+Below is a small test snippet of running Python code in R.
+
 ```{r}
 # Running Python code in R
 py_run_string("x = 10")
@@ -66,15 +66,28 @@ print(z)
 
 I have a feeling now that it's easier to use reticulate package for the purpose of combining Python and R in one place.
 
-Below is a small example using Python code to read a dataframe using Pandas.
+Next example is using Python code to read a dataframe using Pandas.
 
 ```{python}
-# import pandas (as usual in Python)
-import pandas as pd
+# # import pandas (as usual in Python)
+# import pandas as pd
 
-# Reading a df (using one of my old cleaned datasets from a while ago)
-df = pd.read_csv("df_ml.csv")
-df.head()
+# # Reading a df (using one of my old cleaned datasets from a while ago)
+# df = pd.read_csv("df_ml.csv")
+# df = df.rename(columns={"QED Weighted": "QED"})
+# df.head()
 ```
 
-Maybe try ggplot2 next or set up a function code in Python script and run it in R?
+```{r}
+# Transfer above short code into a function and saved as a .py script
+source_python("read_df.py")
+df <- reading_df("df_ml.csv")
+```
+
+```{r}
+library(ggplot2)
+
+# Sample plot for trial only 
+# (will need to use a different dataset to show a more meaningful plot actually... plot looks funny at the moment!)
+ggplot(df, aes(Max_Phase, QED)) + geom_point()
+```
