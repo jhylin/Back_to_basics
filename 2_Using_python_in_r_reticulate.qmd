@@ -60,12 +60,13 @@ library(reticulate)
 # Reference: https://rstudio.github.io/reticulate/articles/python_packages.html
 
 # Import pandas
-py_require("pandas")    
-pd <- import("pandas")
+py_require("pandas")
+# below likely needed if calling pandas in r code # (but since I'll be using python code, we can just import python packages as usual without following code)    
+#pd <- import("pandas")
 
 # Import plotnine
 py_require( "plotnine")
-p9 <- import("plotnine")
+#p9 <- import("plotnine")
 ```
 
 ```{r}
