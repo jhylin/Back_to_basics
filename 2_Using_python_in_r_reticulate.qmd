@@ -61,7 +61,8 @@ library(reticulate)
 
 # Import pandas
 py_require("pandas")
-# below likely needed if calling pandas in r code # (but since I'll be using python code, we can just import python packages as usual without following code)    
+# below likely needed if calling pandas in r code, but since I'll be using python code, 
+# we can just import python packages as usual without following code
 #pd <- import("pandas")
 
 # Import plotnine
