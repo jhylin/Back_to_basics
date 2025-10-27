@@ -90,6 +90,7 @@ with conversion.localconverter(default_converter):
     
     import rpy2.robjects.lib.ggplot2 as gp
 
+
     # Visualising with ggplot2 in Python
 
     # ggplot2 = importr('ggplot2')
@@ -100,13 +101,13 @@ with conversion.localconverter(default_converter):
     # from rpy2.robjects import rl
 
     p = (gp.ggplot(dataf) + 
-        gp.aes_string(x='HBD', y='HBA') + 
+        gp.aes(x='Polar.Surface.Area', y='QED.Weighted') + 
         gp.geom_point())
 
     ## To see plots in an output cell -> note: this doesn't work yet, it generates an empty .png
     # from rpy2.ipython.ggplot import image_png
-    
-    # image_png(p)
+
+    # display(image_png(p))
 
     # this code seems to work by completing the run, but it doesn't show a plot as a code output...
     p.plot()
@@ -119,6 +120,25 @@ type(p)
 27/10/25 - Managed to run code without issues till the dataframe part but for plot, for some reasons, it can not be shown yet...
 
 ```{python}
+p
+
+# Displays a table (?)
+```
+
+```{python}
+with conversion.localconverter(default_converter):
+    from rpy2.ipython.ggplot import image_png, display_png
+    converted = gp.ggplot2_conversion(p)
+    image_png(converted)
+    # display_png(converted)
+```
+
+New error message after running above -    
+R callback write-console:  All aesthetics have length 1, but the data has 5670 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.
+
+```{python}
 # with conversion.localconverter(default_converter):
 
 #     from rpy2.ipython.ggplot import display_png
@@ -128,3 +148,4 @@ type(p)
 
 #     p
 ```
+

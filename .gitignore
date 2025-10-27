@@ -23,6 +23,9 @@ hello.py
 1_Using_python_in_r_reticulate.rmd
 2_Using_python_in_r_reticulate_files
 2_Using_python_in_r_reticulate.html
-1_Using_r_in_python_rpy2.ipynb
 1_Using_r_in_python_rpy2.html
 1_Using_r_in_python_rpy2_files
+
+# Tests
+1_Using_r_in_python_rpy2.ipynb
+rpy2_magic_R.ipynb
