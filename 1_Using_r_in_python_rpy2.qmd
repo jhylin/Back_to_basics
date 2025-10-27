@@ -79,6 +79,8 @@ with conversion.localconverter(default_converter):
 
 So far, all code above work with a final output of a dataframe shown but it won't transform into a .qmd preview i.e. html page, therefore rpy2 may not be as easy to use so far. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. When running the code cells below, the same error message is there too.
 
+The error message can be resolved by setting up a local converter in the code as shown below.
+
 
 ```{python}
 with conversion.localconverter(default_converter):
