@@ -148,6 +148,8 @@ R callback write-console:  All aesthetics have length 1, but the data has 5670 r
 ℹ Please consider using `annotate()` or provide this layer with data containing
   a single row.
 
+* TODO: Perhaps overcome above by using pandas df instead of the "R dataframe in Python".
+
 ```{python}
 # with conversion.localconverter(default_converter):
 
