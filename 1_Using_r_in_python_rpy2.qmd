@@ -1,7 +1,7 @@
 ---
 title: "Using R in Python - rpy2"
 author: Jennifer HY Lin
-date: 2025-10-18
+date: 2025-10-29
 draft: true
 categories: 
     - Notes
@@ -72,9 +72,13 @@ with conversion.localconverter(default_converter):
     # Sample data only
     dataf = utils.read_csv("df_ml.csv")
     
-    dataf
+    #dataf
 
     print(dataf.colnames)
+```
+
+```{python}
+print(dataf)
 ```
 
 So far, all code above work with a final output of a dataframe shown but it won't transform into a .qmd preview i.e. html page, therefore rpy2 may not be as easy to use so far. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. When running the code cells below, the same error message is there too.
@@ -85,18 +89,18 @@ The error message can be resolved by setting up a local converter in the code as
 ```{python}
 with conversion.localconverter(default_converter):
 
-    from rpy2.robjects.packages import importr
-    base = importr('base')
+    # from rpy2.robjects.packages import importr
+    # base = importr('base')
     
     import rpy2.robjects.lib.ggplot2 as gp
-
+    #from IPython.core import display
 
     # Visualising with ggplot2 in Python
 
     # ggplot2 = importr('ggplot2')
 
     # import rpy2.robjects.lib.ggplot2 as ggplot2
-    # from robjects.robjects.lib import ggplot2
+    # from rpy2.robjects.lib import grdevices
 
     # from rpy2.robjects import rl
 
@@ -104,13 +108,19 @@ with conversion.localconverter(default_converter):
         gp.aes(x='Polar.Surface.Area', y='QED.Weighted') + 
         gp.geom_point())
 
+    # p = (gp.ggplot(dataf) +
+    #     gp.geom_bar(gp.aes(x='Polar.Surface.Area')))
+
     ## To see plots in an output cell -> note: this doesn't work yet, it generates an empty .png
     # from rpy2.ipython.ggplot import image_png
 
-    # display(image_png(p))
+    # image_png(p)
 
     # this code seems to work by completing the run, but it doesn't show a plot as a code output...
-    p.plot()
+    # p.plot()
+
+    #print(p)
+
 ```
 
 ```{python}
@@ -126,11 +136,11 @@ p
 ```
 
 ```{python}
-with conversion.localconverter(default_converter):
-    from rpy2.ipython.ggplot import image_png, display_png
-    converted = gp.ggplot2_conversion(p)
-    image_png(converted)
-    # display_png(converted)
+# with conversion.localconverter(default_converter):
+#     from rpy2.ipython.ggplot import image_png, display_png
+#     converted = gp.ggplot2_conversion(p)
+#     image_png(converted)
+#     # display_png(converted)
 ```
 
 New error message after running above -    
@@ -141,11 +151,14 @@ R callback write-console:  All aesthetics have length 1, but the data has 5670 r
 ```{python}
 # with conversion.localconverter(default_converter):
 
+#     # from IPython.core import display
 #     from rpy2.ipython.ggplot import display_png
 #     # register display func with PNG formatter:
 #     png_formatter = get_ipython().display_formatter.formatters['image/png']
 #     dpi = png_formatter.for_type(gp.GGPlot, display_png)
 
-#     p
+    #p
+
+    # display.Image(display_png(p))
 ```
 
