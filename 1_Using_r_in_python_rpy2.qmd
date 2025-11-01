@@ -10,6 +10,10 @@ format: html
 
 This is something I've always wanted to try, that is using both R and Python in one place so here it is. 
 
+<br>
+
+##### **Setting up notebook environment**
+
 Steps:
 
 This notebook has been created using a virtual environment using uv, with the associated repository created using the project structure from uv too. This step has been done prior to the executions of the following steps.
@@ -33,7 +37,13 @@ install.packages("languageserver")
 
 Note: the installations of R-related packages need to be done in the R console in RStudio/Positron IDE or R terminal in VS Code. The R code lines above are not to be executed in .qmd or .rmd as this will lead to an error message like this, "trying to use CRAN without setting a mirror..." when trying to preview the .qmd or .rmd.
 
-Essentially, I think there are possibly two packages that may do the trick - one is rpy2 and the other is reticulate. So I'll try rpy2 first in this post.
+Essentially, I think there are possibly two packages that may do the trick - one is rpy2 and the other is reticulate. So I'll try rpy2 first in this post. For the note on using reticulate package, it'll be in a separate post.
+
+There will be two different versions of code below where one is based on R dataframe in Python and ggplot2, and the other is based on using pandas dataframe in Python and ggplot2. From my little experience on using both versions of code, I'd say the second one using pandas and ggplot2 works better than the first (other more experienced users may have different opinions of course).
+
+<br>
+
+##### **Using R dataframe in python and ggplot2**
 
 ```{python}
 import rpy2
@@ -43,8 +53,6 @@ import rpy2.ipython.html
 rpy2.ipython.html.init_printing()
 
 from rpy2.robjects.packages import importr
-
-## Use R dataframe in python
 
 # Using a local converter
 from rpy2.robjects import conversion, default_converter
@@ -74,15 +82,22 @@ with conversion.localconverter(default_converter):
     # print(p)
 ```
 
-The first coding issue encountered is that the code to produce a final output of the dataframe won't transform into a .qmd preview i.e. html page. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. One of the solutions I've found online is to set up a local converter in the code and run all rpy2-related code within this converter (as commented in the code above).
+<br>
 
-The second issue is that I've only managed to run the code to show R dataframe in Python but not the plot... hence you will see the error message generated from the code above, with only the dataframe column names shown without a plot there. To resolve this issue, more time is spent on looking for answers online. A mini test was eventually done in Jupyter notebook to show a short code to achieve a simple plot (**link to .ipynb in repo to be added**) by calling R magic in Python kernel via rpy2. The full code to import dataframe and make a simple scatter plot based on the data in the dataframe is shown below.
+##### **Coding issues**
+
+The first coding issue encountered is that the code to produce a final output of the dataframe won't transform into a .qmd preview i.e. html page. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. One of the solutions I've found online (**add link**) is to set up a local converter in the code and run all rpy2-related code within this converter (as commented in the code above).
+
+The second issue is that I've only managed to run the code to show R dataframe in Python but not the plot... hence you will see the error message generated from the code above, with only the column names shown without a plot there. To resolve this issue, more time is spent on looking for answers online. A mini test has been done in a Jupyter notebook to show a short code to achieve a simple plot (**link to .ipynb in repo to be added** with **ref link for code**) by calling R magic in Python kernel via rpy2. Once this works, I then manage to change the code to import a sample dataframe and set up to display a simple scatter plot as shown below.
+
+<br>
+
+##### **Using pandas and ggplot2**
 
 ```{python}
 # Load R magic
 %load_ext rpy2.ipython
 
-# Use pandas df
 import pandas as pd
 
 df = pd.read_csv("df_ml.csv")
