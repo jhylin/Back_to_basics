@@ -1,7 +1,7 @@
 ---
 title: "Using R in Python - rpy2"
 author: Jennifer HY Lin
-date: 2025-10-29
+date: 2025-11-1
 draft: true
 categories: 
     - Notes
@@ -25,142 +25,83 @@ install.packages("languageserver")
 
 3. I've just figured out that I probably should've installed [reticulate package](https://rstudio.github.io/reticulate/) first actually ([GitHub repo here](https://github.com/rstudio/reticulate/)). It's basically a R interface to Python that'll be very useful.
 
-```{{r}}
-install.packages("reticulate")
-```
+4. Install rmarkdown package so can preview .qmd docs.
 
-* Install rmarkdown package so can preview .qmd docs.
+5. Install R extension for VS Code (because I'm using VS Code but I think there is a very similar IDE called Positron created by Posit which may be easier to use for this case).
 
-```{{r}}
-install.packages("rmarkdown")
-```
-
-4. Install R extension for VS Code (because I'm using VS Code but I think there is a very similar IDE called Positron created by Posit which may be easier to use for this case).
-
-5. Install [rpy2 package](https://github.com/rpy2/rpy2).
+6. Install [rpy2 package](https://github.com/rpy2/rpy2).
 
 Note: the installations of R-related packages need to be done in the R console in RStudio/Positron IDE or R terminal in VS Code. The R code lines above are not to be executed in .qmd or .rmd as this will lead to an error message like this, "trying to use CRAN without setting a mirror..." when trying to preview the .qmd or .rmd.
 
-6. I'll have to try to show and run both R and Python code below **to be done**
-
-*There are possibly two packages that may do the trick - one is rpy2 and the other is reticulate. So I'll try rpy2 first.*
+Essentially, I think there are possibly two packages that may do the trick - one is rpy2 and the other is reticulate. So I'll try rpy2 first in this post.
 
 ```{python}
 import rpy2
 import rpy2 as robjects
-```
-
-```{python}
-# from functools import partial
-# from rpy2.ipython import html
-# html.html_rdataframe=partial(html.html_rdataframe, table_class="docutils")
-
 ## To print HTML in notebooks
 import rpy2.ipython.html
 rpy2.ipython.html.init_printing()
 
 from rpy2.robjects.packages import importr
-```
 
-```{python}
+## Use R dataframe in python
+
+# Using a local converter
 from rpy2.robjects import conversion, default_converter
-
 with conversion.localconverter(default_converter):
 
     utils = importr('utils')
-
-    # Sample data only
     dataf = utils.read_csv("df_ml.csv")
     
-    #dataf
-
+    #print(dataf)
     print(dataf.colnames)
-```
 
-```{python}
-print(dataf)
-```
-
-So far, all code above work with a final output of a dataframe shown but it won't transform into a .qmd preview i.e. html page, therefore rpy2 may not be as easy to use so far. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. When running the code cells below, the same error message is there too.
-
-The error message can be resolved by setting up a local converter in the code as shown below.
-
-
-```{python}
-with conversion.localconverter(default_converter):
-
-    # from rpy2.robjects.packages import importr
-    # base = importr('base')
-    
+    ## Visualising with ggplot2 in Python
     import rpy2.robjects.lib.ggplot2 as gp
-    #from IPython.core import display
 
-    # Visualising with ggplot2 in Python
-
-    # ggplot2 = importr('ggplot2')
-
-    # import rpy2.robjects.lib.ggplot2 as ggplot2
-    # from rpy2.robjects.lib import grdevices
-
-    # from rpy2.robjects import rl
-
-    p = (gp.ggplot(dataf) + 
-        gp.aes(x='Polar.Surface.Area', y='QED.Weighted') + 
+    p = (gp.ggplot(dataf, gp.aes(x='Polar.Surface.Area', y='QED.Weighted')) + 
+        # gp.aes(x='Polar.Surface.Area', y='QED.Weighted') + 
         gp.geom_point())
 
-    # p = (gp.ggplot(dataf) +
-    #     gp.geom_bar(gp.aes(x='Polar.Surface.Area')))
+    ## To see plots in an output cell - this doesn't work yet, it generates an empty .png with error message
+    from rpy2.ipython.ggplot import image_png
+    image_png(p)
 
-    ## To see plots in an output cell -> note: this doesn't work yet, it generates an empty .png
-    # from rpy2.ipython.ggplot import image_png
-
-    # image_png(p)
-
-    # this code seems to work by completing the run, but it doesn't show a plot as a code output...
+    ## this code seems to work by completing the run, but no plot is shown
     # p.plot()
 
-    #print(p)
-
+    ## this code also seems to work but with no plot shown
+    # print(p)
 ```
 
+The first coding issue encountered is that the code to produce a final output of the dataframe won't transform into a .qmd preview i.e. html page. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. One of the solutions I've found online is to set up a local converter in the code and run all rpy2-related code within this converter (as commented in the code above).
+
+The second issue is that I've only managed to run the code to show R dataframe in Python but not the plot... hence you will see the error message generated from the code above, with only the dataframe column names shown without a plot there. To resolve this issue, more time is spent on looking for answers online. A mini test was eventually done in Jupyter notebook to show a short code to achieve a simple plot (**link to .ipynb in repo to be added**) by calling R magic in Python kernel via rpy2. The full code to import dataframe and make a simple scatter plot based on the data in the dataframe is shown below.
+
 ```{python}
-type(p)
+# Load R magic
+%load_ext rpy2.ipython
+
+# Use pandas df
+import pandas as pd
+
+df = pd.read_csv("df_ml.csv")
+df = df.rename(columns={"QED Weighted": "QED", "Polar Surface Area": "PSA"})
+df.head()
 ```
 
-27/10/25 - Managed to run code without issues till the dataframe part but for plot, for some reasons, it can not be shown yet...
 
 ```{python}
-p
+from rpy2.robjects import conversion, default_converter
+with conversion.localconverter(default_converter):
 
-# Displays a table (?)
-```
+    # Importing ggplot2
+    %R require(ggplot2)
 
-```{python}
-# with conversion.localconverter(default_converter):
-#     from rpy2.ipython.ggplot import image_png, display_png
-#     converted = gp.ggplot2_conversion(p)
-#     image_png(converted)
-#     # display_png(converted)
-```
+    # Take name of input variable df and assign it to an R variable of the same name
+    %R -i df
 
-New error message after running above -    
-R callback write-console:  All aesthetics have length 1, but the data has 5670 rows.
-ℹ Please consider using `annotate()` or provide this layer with data containing
-  a single row.
-
-* TODO: Perhaps overcome above by using pandas df instead of the "R dataframe in Python".
-
-```{python}
-# with conversion.localconverter(default_converter):
-
-#     # from IPython.core import display
-#     from rpy2.ipython.ggplot import display_png
-#     # register display func with PNG formatter:
-#     png_formatter = get_ipython().display_formatter.formatters['image/png']
-#     dpi = png_formatter.for_type(gp.GGPlot, display_png)
-
-    #p
-
-    # display.Image(display_png(p))
+    # Plot the df
+    %R print(ggplot(df, aes(PSA, QED, colour = Max_Phase)) + geom_point())
 ```
 
