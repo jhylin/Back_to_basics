@@ -105,7 +105,6 @@ df = df.rename(columns={"QED Weighted": "QED", "Polar Surface Area": "PSA"})
 df.head()
 ```
 
-
 ```{python}
 from rpy2.robjects import conversion, default_converter
 with conversion.localconverter(default_converter):
@@ -120,3 +119,4 @@ with conversion.localconverter(default_converter):
     %R print(ggplot(df, aes(PSA, QED, colour = Max_Phase)) + geom_point())
 ```
 
+?need to mention about pandas df vs. R data.frame and R data.table (hmm...)
