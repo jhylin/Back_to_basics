@@ -1,7 +1,7 @@
 ---
 title: "Using Python in R - reticulate"
 author: Jennifer HY Lin
-date: 2025-10-25
+date: 2025-11-4
 draft: true
 categories: 
     - Notes
@@ -12,7 +12,7 @@ format: html
 
 The main goal here is to try using Python and R concurrently in a notebook setting. Both programming languages have their weaknesses and strengths, and also differences and similarities. By combining them together, we can leverage R's strong statistical packages and Python's well-developed and maintained machine learning packages in some of our scientific research work.
 
-I've tried using rpy2 to call R in Python previously and... it's not as easy as I thought... it sort of "half worked" so far, and I've left it as how it is until I get more time later to figure out how to fix it (or rather leave it if reticulate is much easier to use instead). 
+For rpy2 package, I've tried it in a separate post (**add link**). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I've since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.
 
 For [reticulate package](https://rstudio.github.io/reticulate/index.html), the concept is reversed where we are trying to call Python in a R environment as it is a R-based package. So I've changed the title of this post to reflect this.
 

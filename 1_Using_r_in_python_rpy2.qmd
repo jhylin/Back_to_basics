@@ -37,9 +37,9 @@ install.packages("languageserver")
 
 Note: the installations of R-related packages need to be done in the R console in RStudio/Positron IDE or R terminal in VS Code. The R code lines above are not to be executed in .qmd or .rmd as this will lead to an error message like this, "trying to use CRAN without setting a mirror..." when trying to preview the .qmd or .rmd.
 
-Essentially, I think there are possibly two packages that may do the trick - one is rpy2 and the other is reticulate. So I'll try rpy2 first in this post. For the note on using reticulate package, it'll be in a separate post.
+Essentially, I think there are possibly two packages that may do the trick - one is rpy2 and the other is reticulate. So I'll try rpy2 first in this post. For the notes on using reticulate package, it'll be in a separate post (**add link**).
 
-There will be two different versions of code below where one is based on R dataframe in Python and ggplot2, and the other is based on using pandas dataframe in Python and ggplot2. From my little experience on using both versions of code, I'd say the second one using pandas and ggplot2 works better than the first (other more experienced users may have different opinions of course).
+There will be two different versions of code below where one is based on using R dataframe in Python and ggplot2, and the other one is based on pandas dataframe in Python with ggplot2. From my little experience using both versions of code, I'd say the second one using pandas and ggplot2 works better than the first (other more experienced users may have different opinions of course... there are always new things to learn for sure).
 
 <br>
 
@@ -119,4 +119,4 @@ with conversion.localconverter(default_converter):
     %R print(ggplot(df, aes(PSA, QED, colour = Max_Phase)) + geom_point())
 ```
 
-?need to mention about pandas df vs. R data.frame and R data.table (hmm...)
+?need to mention about pandas df vs. R data.frame and R data.table (hmm... )
