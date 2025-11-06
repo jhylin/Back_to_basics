@@ -22,8 +22,7 @@ Steps:
 
 This notebook has been created using a virtual environment using uv, with the associated repository created using the project structure from uv too. This step has been done prior to the executions of the following steps.
 
-1. Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (as suggested by this [post](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/))
-
+1. Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (as suggested by this [post](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of Python and R used in this notebook are printed above the plot shown below. 
 
 2. Install R's language server as shown below.
 
@@ -37,7 +36,7 @@ install.packages("languageserver")
 
 5. Install R extension for VS Code (may not be required as this is because I'm using VS Code. There is another very similar IDE called Positron created by Posit which may not require this step).
 
-6. Install [rpy2 package](https://github.com/rpy2/rpy2).
+6. Install [rpy2 package](https://github.com/rpy2/rpy2). This notebook uses rpy2 version 3.6.4.
 
 Note: the installations of R-related packages need to be done in the R console in RStudio/Positron IDE or R terminal in VS Code. The R code above are not to be executed in Quarto markdown (.qmd) or RMarkdown (.rmd) documents as this will lead to an error message like this, "trying to use CRAN without setting a mirror..." when trying to preview the .qmd or .rmd.
 
@@ -88,11 +87,17 @@ with conversion.localconverter(default_converter):
 
 The first coding issue encountered is that the code to produce a final output of the dataframe won't transform into a .qmd preview i.e. html page. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. One of the solutions I've found online (**add link**) is to set up a local converter in the code and run all rpy2-related code within this converter (as commented in the code above).
 
-The second issue is that I've only managed to run the code to show R dataframe in Python but not the plot... hence you will see the error message generated from the code above, with only the column names shown without a plot there. To resolve this issue, more time is spent on looking for answers online. A mini test has been done in a Jupyter notebook to show a short code to achieve a simple plot (**link to .ipynb in repo to be added** that is based on this [code reference](https://stackoverflow.com/questions/43975244/displaying-r-ggplots-inline-in-jupyter-notebooks)) by calling R magic in Python kernel via rpy2. Once this works, I then manage to change the code to import a sample dataframe and set up to display a simple scatter plot as shown below.
+The second issue is that I've only managed to run the code to show R dataframe in Python but not the plot... hence you will see the error message generated from the code above, with only the column names shown without a plot there. To resolve this issue, more time is spent on looking for answers online. A mini test has been done in a Jupyter notebook to show a short code to achieve a simple plot ([link to Jupyter notebook](https://github.com/jhylin/Back_to_basics/blob/main/1_Using_r_in_python_pd_ggplot2_rpy2.ipynb) which is based on this [code reference](https://stackoverflow.com/questions/43975244/displaying-r-ggplots-inline-in-jupyter-notebooks)) by calling R magic in Python kernel via rpy2. Once this works, I then manage to change the code to import a sample dataframe and set up to display a simple scatter plot as shown below.
 
 <br>
 
 ##### **Using pandas and ggplot2**
+
+```{python}
+# python version used
+import sys
+print(sys.version)
+```
 
 ```{python}
 # Load R magic
@@ -108,6 +113,9 @@ df.head()
 ```{python}
 from rpy2.robjects import conversion, default_converter
 with conversion.localconverter(default_converter):
+
+    # R version
+    %R print(R.version.string)
 
     # Importing ggplot2
     %R require(ggplot2)
