@@ -1,14 +1,16 @@
 ---
 title: "Using R in Python - rpy2"
 author: Jennifer HY Lin
-date: 2025-11-7
+date: 2025-11-9
 draft: true
 categories: 
     - Notes
+    - R
+    - Python
 format: html
 ---
 
-This is something I've always wanted to try, that is using both R and Python in one place, so here it is. 
+This is something I've always wanted to try, that is using both R and Python in one place, so here it is.
 
 Essentially, I think there are two packages that may do the trick - one is rpy2 and the other is reticulate. I'll try rpy2 first in this post. For the notes about using reticulate package, it'll be in a separate post (**add link**).
 
@@ -22,21 +24,21 @@ Steps:
 
 This notebook has been created using a virtual environment using uv, with the associated repository created using the project structure from uv too. This step has been done prior to the executions of the following steps.
 
-1. Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (as suggested by this [post](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of Python and R used in this notebook are printed above the plot shown below. 
+1.  Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (as suggested by this [post](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of Python and R used in this notebook are printed above the plot shown below.
 
-2. Install R's language server as shown below.
+2.  Install R's language server as shown below.
 
 ```{{r}}
 install.packages("languageserver")
 ```
 
-3. Install [reticulate package](https://rstudio.github.io/reticulate/) ([GitHub repo](https://github.com/rstudio/reticulate/)). It's a useful R interface to Python and will be used in the other post.
+3.  Install [reticulate package](https://rstudio.github.io/reticulate/) ([GitHub repo](https://github.com/rstudio/reticulate/)). It's a useful R interface to Python and will be used in the other post.
 
-4. Install rmarkdown package (may not be required as this is really just making sure that this note may be posted on my blog later that uses Quarto).
+4.  Install rmarkdown package (may not be required as this is really just making sure that this note may be posted on my blog later that uses Quarto).
 
-5. Install R extension for VS Code (may not be required as this is because I'm using VS Code. There is another very similar IDE called Positron created by Posit which may not require this step).
+5.  Install R extension for VS Code (may not be required as this is because I'm using VS Code. There is another very similar IDE called Positron created by Posit which may not require this step).
 
-6. Install [rpy2 package](https://github.com/rpy2/rpy2). This notebook uses rpy2 version 3.6.4.
+6.  Install [rpy2 package](https://github.com/rpy2/rpy2). This notebook uses rpy2 version 3.6.4.
 
 Note: the installations of R-related packages need to be done in the R console in RStudio/Positron IDE or R terminal in VS Code. The R code above are not to be executed in Quarto markdown (.qmd) or RMarkdown (.rmd) documents as this will lead to an error message like this, "trying to use CRAN without setting a mirror..." when trying to preview the .qmd or .rmd.
 
