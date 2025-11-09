@@ -24,6 +24,9 @@ hello.py
 1_Using_r_in_python_rpy2.html
 1_Using_r_in_python_rpy2_files
 
+# just trying out uv pip freeze and uv add -r requirements.txt
+uv.lock
+
 
 # Tests
 1_Using_r_in_python_rpy2.ipynb

@@ -150,3 +150,9 @@ plot.show()
 ```
 
 All plots shown in this post using reticulate and the other post using rpy2 should look the same by using the same set of data but different code in two different programming languages (which means I've somewhat achieved my small goal here!).
+
+<br>
+
+##### **Regarding reproducibility of notebook or project in R**
+
+I realise after finishing these two posts about using R and Python together that I should've created two separate repositories or virtual environments where one is based on Python and the other based on R to improve the reproducibilities of the work (hmm... currently it may look messy with what I've done here, but they're meant to be notes only so I'll leave them off like that as reference only). It is possible and most likely recommended to set up a R virtual environment when working on R-related projects. This [introductory post](https://posit.co/blog/renv-project-environments-for-r/) about [renv](https://rstudio.github.io/renv/articles/renv.html) will help with this. 
