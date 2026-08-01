@@ -10,7 +10,7 @@ wheels/
 .venv
 
 # work-in-progress ideas
-3_Mol_rep_fp.qmd
+3_Looking_at_fg_smiles.qmd
 
 # unused files
 hello.py
