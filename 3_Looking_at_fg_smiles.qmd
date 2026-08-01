@@ -1,9 +1,0 @@
----
-title: "New ideas for side project in Aug 2026"
-format: html
----
-
-* Try using Marimo notebook (marimo pair may be used) and explore functional groups in SMILES (OPSIN may be handy for this) - this may lead to the part about creating drug fragments or scaffolds
-
--> can use old drug SMILES from older ADR side project (CYP substrates from Flockhart)
-
