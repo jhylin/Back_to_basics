@@ -2,6 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo>=0.23.16",
+#     "py2opsin==1.2.0",
 #     "rdkit==2025.9.3",
 # ]
 # ///
@@ -39,6 +40,24 @@ def _(Chem, mol):
     f_group = Chem.MolFromSmarts('C=O')
     matches = mol.GetSubstructMatches(f_group)
     len(matches)
+    return
+
+
+@app.cell
+def _():
+    from py2opsin import py2opsin
+
+    return (py2opsin,)
+
+
+@app.cell
+def _(py2opsin):
+    smiles_string = py2opsin(
+        chemical_name = "ethane",
+        output_format = "SMILES",
+    )
+
+    smiles_string
     return
 
 
