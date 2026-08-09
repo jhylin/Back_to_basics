@@ -18,11 +18,29 @@ def _(mo):
     mo.md(r"""
     **Starting a Marimo notebook**
 
-    To create or edit a marimo notebook, use the command: *marimo edit notebook_filename.py* in the terminal ([reference link](https://docs.marimo.io/getting_started/quickstart/) to show other related commands). It will then ask if you'd like to run this notebook in a sandboxed venv containing this notebooks's dependencies. By answering yes, this'll immediately take you to the notebook opened in your default web browser. This requires marimo to be installed earlier, and this Marimo [reference link](https://docs.marimo.io/getting_started/installation/) shows how to do it. Marimo notebooks work well with uv, a Python package installer and manager.
+    To create or edit a marimo notebook, use the command: *marimo edit notebook_filename.py* in the terminal ([link](https://docs.marimo.io/getting_started/quickstart/) to show other related commands). It will then ask if you'd like to run this notebook in a sandboxed venv containing this notebooks's dependencies. By answering yes, this'll immediately take you to the notebook opened in your default web browser. This requires marimo to be installed earlier, and this Marimo [link](https://docs.marimo.io/getting_started/installation/) shows how to do it.
 
-    The only other thing to note here is that Marimo notebooks currently only work with Python programming language and not other languages (unless there are new plans announced from the Marimo team).
+    **Other features of Marimo notebooks**
 
-    Marimo notebook apparently exists as a Python script so if it is opened in an editor (e.g. VS Code), it'll look different from how it appears in a browser as the code inside the notebook will look like it's for an app.
+    - Work well with uv, a Python package installer and manager
+
+    - Currently only work with Python programming language and not other languages (unless new plans are announced by the Marimo team)
+
+    - Exist as a Python script so if it is opened in an editor (e.g. VS Code), it'll look different from how it appears in a browser as the code inside the notebook will look like it's for an application (implying that you can make interactive apps by using Marimo...!)
+
+    **Conversion between different notebook or file formats**
+
+    This [link](https://docs.marimo.io/guides/coming_from/jupyter/) shows how to convert a Jupyter notebook into a Marimo notebook, export a Marimo notebook into a Jupyter notebook or convert a Python script into a Marimo notebook, and other relevant information.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    **Background**
+
+    The following code are just my random coding sessions trying to see if some of the common cheminformatics Python packages can be used in a Marimo notebook. I'm also trying to become more familiar with functional groups in SMILES too... and realise I may enter into a very complex area just by wanting to do this.
     """)
     return
 
