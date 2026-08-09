@@ -35,6 +35,13 @@ def _(mo):
     return
 
 
+@app.cell
+def _():
+    # insert image doc link - https://docs.marimo.io/api/media/image/
+    # mo.image(src="path/to/image.png")
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
