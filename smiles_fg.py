@@ -26,7 +26,7 @@ def _(mo):
 
     - Currently only work with Python programming language and not other languages (unless new plans are announced by the Marimo team)
 
-    - Exist as a Python script so if it is opened in an editor (e.g. VS Code), it'll look different from how it appears in a browser as the code inside the notebook will look like it's for an application (implying that you can make interactive apps by using Marimo...!)
+    - Exist as a Python script so if it is opened in an editor (e.g. VS Code), it'll look different (Figure 1) from how it appears in a browser as the code inside the notebook will look like it's for an application (implying that you can make interactive apps by using Marimo...!)
 
     **Conversion between different notebook or file formats**
 
@@ -36,9 +36,9 @@ def _(mo):
 
 
 @app.cell
-def _():
+def _(mo):
     # insert image doc link - https://docs.marimo.io/api/media/image/
-    # mo.image(src="path/to/image.png")
+    mo.image(src="marimo_py.jpg", width=850, height=450, caption="Fig.1 - A partial screenshot of a Marimo notebook Python script in VS Code")
     return
 
 
