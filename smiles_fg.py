@@ -10,12 +10,16 @@
 import marimo
 
 __generated_with = "0.23.16"
-app = marimo.App(width="full")
+app = marimo.App(width="full", auto_download=["html"])
 
 
 @app.cell
 def _():
-    # May be possible to try out marimo glance in the end - https://github.com/marimo-team/marimo-glance
+    # Had a quick look at marimo glance (https://github.com/marimo-team/marimo-glance), it turns out that it's an option to view marimo notebook at a glance as it's a web browser extension that can be installed to view marimo notebook from GitHub, gist or GitLab in a Chrome or Firefox browser. One limitation is the notebook needs to be compatible with WebAssembly for this extension to work.
+
+    # Other options to export or publish marimo notebooks - https://docs.marimo.io/guides/exporting/ and https://docs.marimo.io/guides/publishing/
+
+    # So likely this piece will be published on the Quarto blog instead
     return
 
 
